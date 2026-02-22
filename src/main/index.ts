@@ -4,6 +4,7 @@ import * as path from 'path';
 import type { PluginConfig, KeywordRule, MessageStat } from '@/types/config.d';
 
 const SLUG = 'dealing-with-annoying-chats';
+const NOTIFICATION_PREVIEW_LENGTH = 50;
 const IPC = {
   GET_CONFIG: `${SLUG}.getConfig`,
   SET_CONFIG: `${SLUG}.setConfig`,
@@ -183,8 +184,11 @@ function shouldAutoRead(targetId: string): boolean {
 
 async function callAI(messages: string[], systemPrompt?: string): Promise<string> {
   const config = pluginConfig.aiConfig;
-  if (!config.enabled || !config.apiKey) {
-    throw new Error('AI功能未启用或未配置API Key');
+  if (!config.enabled) {
+    throw new Error('AI功能未启用，请在设置中开启');
+  }
+  if (!config.apiKey) {
+    throw new Error('未配置API Key，请在设置中填写');
   }
 
   const prompt = systemPrompt || config.systemPrompt;
@@ -248,7 +252,7 @@ ipcMain.handle(IPC.CHECK_KEYWORD, (
       if (result.rule!.notifyAfterReply) {
         showNotification(
           '自动回复已发送',
-          `已向 ${result.rule!.targetName} 发送回复: ${result.reply!.substring(0, 50)}${result.reply!.length > 50 ? '...' : ''}`
+          `已向 ${result.rule!.targetName} 发送回复: ${result.reply!.substring(0, NOTIFICATION_PREVIEW_LENGTH)}${result.reply!.length > NOTIFICATION_PREVIEW_LENGTH ? '...' : ''}`
         );
       }
 

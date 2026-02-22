@@ -7,10 +7,14 @@ import type {
   MessageStat,
 } from '@/types/config.d';
 
+const MAX_AI_CONTEXT_MESSAGES = 150;
+const MAX_MESSAGE_CONTENT_LENGTH = 500;
+const TEMPLATE_PREVIEW_LENGTH = 30;
+
 let currentConfig: PluginConfig | null = null;
 
 function generateId(): string {
-  return `${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+  return crypto.randomUUID();
 }
 
 async function loadConfig(): Promise<PluginConfig> {
@@ -189,7 +193,7 @@ function renderKeywordTab(container: HTMLElement, config: PluginConfig): void {
           </div>
           <div style="margin-top:4px;">
             <span style="font-size:12px;color:#999;">回复：</span>
-            ${rule.replies.map((r) => `<span class="dwac-tag dwac-tag-reply">${escapeHtml(r.length > 30 ? r.substring(0, 30) + '...' : r)}</span>`).join('')}
+            ${rule.replies.map((r) => `<span class="dwac-tag dwac-tag-reply">${escapeHtml(r.length > TEMPLATE_PREVIEW_LENGTH ? r.substring(0, TEMPLATE_PREVIEW_LENGTH) + '...' : r)}</span>`).join('')}
           </div>
           <div style="margin-top:4px;font-size:12px;color:#999;">
             延时 ${rule.delayMin}-${rule.delayMax} 秒 | ${rule.randomReply ? '随机回复' : '顺序回复'} | ${rule.notifyAfterReply ? '回复后通知' : '静默回复'}
@@ -942,7 +946,7 @@ async function handleAIButtonClick(): Promise<void> {
     return;
   }
 
-  const messages = collectRecentMessages(150);
+  const messages = collectRecentMessages(MAX_AI_CONTEXT_MESSAGES);
   if (messages.length === 0) {
     alert('未能获取到聊天记录，请确保当前有打开的聊天窗口');
     return;
@@ -965,7 +969,7 @@ function collectRecentMessages(count: number): string[] {
     const name = nameEl?.textContent?.trim() || '未知';
     const content = contentEl?.textContent?.trim() || el.textContent?.trim() || '';
 
-    if (content && content.length > 0 && content.length < 500) {
+    if (content && content.length > 0 && content.length < MAX_MESSAGE_CONTENT_LENGTH) {
       messages.push(`${name}: ${content}`);
     }
   });
@@ -1056,7 +1060,7 @@ function showTemplatePopup(x: number, y: number): void {
           .forEach((tpl) => {
             const item = document.createElement('div');
             item.style.cssText = 'padding:6px 12px;cursor:pointer;font-size:13px;transition:.15s;';
-            item.textContent = `${tpl.name}: ${tpl.content.substring(0, 30)}${tpl.content.length > 30 ? '...' : ''}`;
+            item.textContent = `${tpl.name}: ${tpl.content.substring(0, TEMPLATE_PREVIEW_LENGTH)}${tpl.content.length > TEMPLATE_PREVIEW_LENGTH ? '...' : ''}`;
             item.addEventListener('mouseenter', () => { item.style.background = 'var(--bg_bottom_light,#f0f0f0)'; });
             item.addEventListener('mouseleave', () => { item.style.background = 'transparent'; });
             item.addEventListener('click', () => {
