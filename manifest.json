@@ -1,16 +1,16 @@
 {
   "manifest_version": 4,
   "type": "extension",
-  "name": "LLTemplate-Vite",
-  "slug": "LLTemplate-Vite",
-  "description": "A plugin template for LiteLoaderQQNT, powered by Vite & TypeScript",
-  "version": "2.0.0",
+  "name": "应付烦人聊天",
+  "slug": "dealing-with-annoying-chats",
+  "description": "一款帮助你应付烦人/无聊聊天的插件：关键词自动回复、AI辅助回复、快捷回复模板、消息统计、自动已读、定时免打扰等功能",
+  "version": "1.0.0",
   "icon": null,
   "thumb": null,
   "authors": [
     {
-      "name": "MisaLiu",
-      "link": "https://github.com/MisaLiu"
+      "name": "FXDYJ",
+      "link": "https://github.com/FXDYJ"
     }
   ],
   "platform": [
@@ -24,11 +24,11 @@
     "renderer": "./renderer/index.js"
   },
   "repository": {
-    "repo": "MisaLiu/LiteLoaderQQNT-PluginTemplate-Vite",
-    "branch": "master",
+    "repo": "FXDYJ/liteloaderqqnt-plugin-dealing-with-annoying-chats",
+    "branch": "main",
     "release": {
-      "tag": "2.0.0",
-      "file": "LLTemplate-Vite"
+      "tag": "1.0.0",
+      "file": "dealing-with-annoying-chats"
     }
   }
 }
