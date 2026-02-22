@@ -1,57 +1,72 @@
-# LiteLoaderQQNT Plugin Template
+# 应付烦人聊天 - LiteLoaderQQNT 插件
 
-本仓库为民间自制的 [LiteLoaderQQNT](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT) 插件模板。
+一款帮助你应付烦人/无聊聊天的 [LiteLoaderQQNT](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT) 插件，让你从无意义的社交中解脱出来。
 
-## 如果你想...
+## ✨ 功能特性
 
-* 在编写插件时使用 `pnpm` 包管理器；
-* 被 `Webpack` 的打包速度困扰已久
-* 希望使用 `TypeScript` 编写插件脚本
-* 想使用 `ESLint` 纠正代码错误和统一格式
-* 执行一行命令即可完成代码检查、代码打包和输出 `zip` 文件
-* 使用 `GitHub Actions` 自动测试打包和发布 release
+### 🔑 关键词自动回复
+- 为指定用户/群聊设置关键词触发规则
+- 支持纯文本匹配和正则表达式
+- 多条回复内容支持随机或顺序选择
+- 可设置随机延时回复（时间范围可自定义），模拟真人打字节奏
+- 回复后可选择通知用户
 
-那么这个模板正好适合你！
+### 🤖 AI 辅助回复
+- 聊天栏新增 AI 按钮，一键获取 AI 建议回复
+- 自动收集最近 150 条聊天记录作为上下文
+- 支持自定义 AI API（兼容 OpenAI 格式）
+- AI 回复需经用户确认后才会填入输入框
+- 可重新生成不满意的回复
+- 可自定义系统提示词、温度等参数
 
-## 使用
+### 📝 快捷回复模板
+- 预设常用回复模板（在忙、收到、开会中等）
+- 支持分类管理（通用、工作、敷衍等）
+- 右键 AI 按钮快速选择模板
+- 可自由添加/删除模板
 
-1. 点击本仓库页面右上角的 `Use this template`，然后选择 `Create a new repository`
-2. 在接下来的页面中填写你的仓库信息后，点击 `Create repository`
-3. 将创建的仓库克隆至本地，然后编辑 [`manifest.json`](manifest.json) （[文档](https://liteloaderqqnt.github.io/docs/introduction.html#%E6%89%8B%E5%8A%A8%E5%88%9B%E5%BB%BA)）
-4. （可选）编辑 [TypeScript 配置文件](tsconfig.json)、[Vite 配置文件](electron.vite.config.ts) 和 [ESLint 配置文件](eslint.config.mjs)，让项目配置风格更符合你的口味
-5. 运行 `pnpm install` 安装依赖包，你也可以随意安装其他需要的依赖包
-6. 开始编写代码
-7. 执行 `pnpm lint` 检查代码
-8. 执行 `pnpm build` 打包代码并输出 `zip` 文件
-9. 安装体验或是将成果分享给你的朋友吧！
+### 👁️ 自动已读
+- 对指定用户/群的消息自动标记为已读
+- 避免出现未读红点，不被催促回复
 
-## 常见问题
+### 🔕 定时免打扰
+- 按时间段设置免打扰（如工作时间 9:00-18:00）
+- 支持按星期几重复
+- 免打扰期间消息静默处理
 
-### 部分模块打包后功能不正常或不起作用
+### 📊 消息统计
+- 统计各联系人的消息频率
+- 帮助识别最频繁发消息的「烦人」联系人
+- 支持按消息数排序
+- 数据仅保存在本地
 
-请遵循 [Rollup 文档](https://rollupjs.org/configuration-options/#external) 将运行不正常的模块添加至 Vite 的 `rollupOptions` 中，然后利用 `vite-plugin-cp` 插件将对应模块复制到 `dist/node_modules` 目录中。
+## 📦 安装
 
-## 鸣谢
-* [Vite](https://vitejs.dev/)
-* [electron-vite](https://electron-vite.org/)
-* [LiteLoaderQQNT](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/)
-* [LLOneBot](https://github.com/LLOneBot/LLOneBot)
-* [LL-Plugin-List-Viewer](https://github.com/ltxhhz/LL-plugin-list-viewer)
+1. 下载 [最新 Release](../../releases/latest) 中的 `dealing-with-annoying-chats.zip`
+2. 在 LiteLoaderQQNT 中安装插件
+3. 重启 QQNT
 
-## 碎碎念
+## 🔧 使用
 
-最近突然发现一年前随手制作的这个模板竟然上了 [LiteLoaderQQNT 官方文档](https://liteloaderqqnt.github.io/docs/introduction.html#%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%9D%BF)，一想到我有一年多的时间未对此仓库进行任何维护，实属惭愧！
+1. 打开 QQNT 设置 → 找到「应付烦人聊天」插件设置页
+2. 配置关键词回复规则、AI 设置、快捷模板等
+3. 在聊天界面使用 🤖 AI 按钮获取回复建议
+4. 右键 AI 按钮可快速选择回复模板
 
-秉持着这样的心态对本仓库进行了翻新维护，并添加了 GitHub Actions 支持，以感恩大家一直的支持。
+## 🛠️ 开发
 
-<div align="right">
-—— Misa Liu 2025/03/31
-</div>
+```bash
+# 安装依赖
+npm install
+
+# 构建
+npm run build
+```
 
 ## License
 ```
-    LiteLoaderQQNT-PluginTemplate-Vite
-    Copyright (C) 2025 HIMlaoS_Misa
+    dealing-with-annoying-chats
+    Copyright (C) 2025
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
